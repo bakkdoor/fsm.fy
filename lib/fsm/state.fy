@@ -22,8 +22,8 @@ class FSM {
       return nil
     }
 
-    def final_state? {
-      @transitions count: @{ next_state to_s == @name } == 0
+    def final? {
+      @transitions empty?
     }
   }
 }

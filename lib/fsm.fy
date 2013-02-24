@@ -15,10 +15,10 @@ class FSM {
     @states = @states to_hash: @{ name }
   }
 
-  def parse: input_string {
+  def parse: input {
     state = @start
 
-    input_string each: |char| {
+    input each: |char| {
       if: (state handle: char) then: |new_state| {
         if: (@states[new_state to_s]) then: |s| {
           state = s
@@ -30,11 +30,6 @@ class FSM {
       }
     }
 
-    # got to end state
-    if: (state final_state?) then: {
-      return true
-    }
-
-    return false
+    return state final?
   }
 }
