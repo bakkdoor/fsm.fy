@@ -12,9 +12,9 @@ class FSM {
       }
     }
 
-    def handle: char {
+    def handle: input {
       @transitions each: |t| {
-        match char {
+        match input {
           case t pattern -> return t next_state
         }
       }
