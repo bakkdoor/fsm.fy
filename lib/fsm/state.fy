@@ -7,9 +7,9 @@ class FSM {
     }
 
     def on: pattern {
-      t = Transition new: self pattern: pattern
-      @transitions << t
-      t
+      Transition new: self pattern: pattern . tap: |t| {
+        @transitions << t
+      }
     }
 
     def handle: char {
