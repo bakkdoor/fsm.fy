@@ -26,12 +26,12 @@ class FSM {
           StateNotFoundError raise: "State not found: #{new_state}"
         }
       } else: {
-        ParseFailure raise: "Could not parse: #{char} with state: #{state}"
+        ParseFailure raise: "Could not parse: #{char} with state: #{state name}"
       }
     }
 
     # got to end state
-    if: (state transitions empty?) then: {
+    if: (state final_state?) then: {
       return true
     }
 
