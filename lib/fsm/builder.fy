@@ -2,13 +2,13 @@ class FSM {
   class Builder {
     read_slot: 'states
 
-    def initialize: @fsm {
+    def initialize {
       @states = []
     }
 
     def build: block {
       block call: [self]
-      @fsm states: @states
+      @states
     }
 
     def unknown_message: m with_params: p {

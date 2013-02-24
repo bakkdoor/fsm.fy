@@ -10,9 +10,9 @@ class FSM {
 
   def initialize: block {
     @states = []
-    Builder new: self . build: block
-    @start = @states first
-    @states = @states to_hash: @{ name }
+    states = Builder new build: block
+    @start = states first
+    @states = states to_hash: @{ name }
   }
 
   def parse: input {
