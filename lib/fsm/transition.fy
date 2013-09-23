@@ -25,7 +25,6 @@ class FSM {
       match input {
         case @pattern -> |m|
           { @callback call: [input] } if: @callback
-
           { return m } unless: @conditionals
 
           m = @conditionals === input

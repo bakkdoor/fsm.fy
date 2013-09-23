@@ -15,18 +15,21 @@ class FSM {
     }
 
     def handle: input {
+      next_state = nil
+
       try {
         @transitions each: |t| {
           match input {
             case t ->
-              return t next_state
+              next_state = t next_state
+              return next_state
           }
         }
       } catch StandardError => e {
         ProcessFailure new: self input: input with: e . raise!
       }
 
-      return nil
+      return next_state
     }
 
     def final? {
