@@ -18,7 +18,7 @@ class FSM {
     alias_method: 'do: for: '!
 
     def ?? block {
-      @conditionals = ConditionalTransitions new: block . transitions
+      @conditionals = ConditionalTransitions new: block
     }
 
     def === input {
@@ -28,14 +28,9 @@ class FSM {
 
           { return m } unless: @conditionals
 
-          @conditionals each_value: |ct| {
-            match input {
-              case ct condition -> |m|
-                { ct callback call: [input] } if: $ ct callback
-                @next_state = ct next_state
-                return m
-            }
-          }
+          m = @conditionals === input
+          @next_state = @conditionals next_state
+          m
       }
     }
   }
@@ -70,6 +65,21 @@ class FSM {
       ct = ConditionalTransition new: condition
       @transitions[condition]: ct
       ct
+    }
+
+    def next_state {
+      @next_state
+    }
+
+    def === input {
+      @transitions each_value: |ct| {
+        match input {
+          case ct condition -> |m|
+            { ct callback call: [input] } if: $ ct callback
+            @next_state = ct next_state
+            return m
+        }
+      }
     }
   }
 }
