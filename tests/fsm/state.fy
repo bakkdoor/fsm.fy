@@ -6,7 +6,7 @@ FancySpec describe: FSM State with: {
 
   it: "is not a final state if transitions exist" with: 'final? when: {
     s = FSM State new: "non_final_state"
-    s on: "foo" --> 'bar
+    s + "foo" -> 'bar
     s final? is: false
   }
 }
