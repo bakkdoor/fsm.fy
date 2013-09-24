@@ -14,9 +14,8 @@ print_empty_files = FSM new: {
     File exists?: f && { File read: f . bytes size == 0 }
   }
 
-  final filter_empty: @{
+  final loop filter_empty: @{
     + ValidFile -> filter_empty ! @{ println }
-    + _         -> filter_empty
   }
 }
 

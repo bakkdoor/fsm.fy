@@ -49,6 +49,10 @@ class FSM {
     def initialize: @builder {
       initialize: @builder do: @{ final: true }
     }
+
+    def loop {
+      LoopState new: @builder
+    }
   }
 
   class LoopState : SpecialState {
@@ -56,6 +60,10 @@ class FSM {
       initialize: @builder do: |state| {
         state + _ -> state
       }
+    }
+
+    def final {
+      FinalState new: @builder
     }
   }
 }
