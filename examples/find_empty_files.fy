@@ -10,12 +10,12 @@ unless: file_pattern do: {
 }
 
 print_empty_files = FSM new: {
-  ValidFile = |f| {
+  EmptyFile = |f| {
     File exists?: f && { File read: f . bytes size == 0 }
   }
 
   final loop filter_empty: @{
-    + ValidFile -> filter_empty ! @{ println }
+    + EmptyFile -> filter_empty ! @{ println }
   }
 }
 
